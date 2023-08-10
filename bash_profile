@@ -32,16 +32,6 @@ function timeload {
 # this alias is used for sourcing, set to `quickload` or `timeload`
 alias myload=timeload
 
-
-# Completion
-if [ -r "$HOME/brew/etc/profile.d/bash_completion.sh" ]; then
-  myload "$HOME/brew/etc/profile.d/bash_completion.sh"
-fi
-if [ -r "/opt/local/etc/profile.d/bash_completion.sh" ]; then
-  myload "/opt/local/etc/profile.d/bash_completion.sh"
-fi
-
-
 # Load customizations from SHELL_CUSTOM_DIR
 for f in $(ls $SHELL_CUSTOM_DIR/*.bash); do
     myload "$f"

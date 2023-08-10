@@ -1,5 +1,9 @@
 # shellcheck shell=bash
 
+if [ -n "${INSIDE_EMACS}" ]; then
+    return 0
+fi
+
 # Append the history list to the file named by the value of the HISTFILE
 # variable when the shell exits, rather than overwriting the file.
 shopt -s histappend

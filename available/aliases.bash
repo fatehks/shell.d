@@ -8,5 +8,6 @@ alias lf='ls -F'
 alias laf='ls -aF'
 alias ltr='ls -latrF --color=auto'
 alias ll='ls -latr'
+alias l='ls -l'
 alias llh='ls -latrh'
 
