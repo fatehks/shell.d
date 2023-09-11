@@ -11,3 +11,4 @@ alias ll='ls -latr'
 alias l='ls -l'
 alias llh='ls -latrh'
 
+alias kssh="kitty +kitten ssh"
