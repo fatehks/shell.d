@@ -1,8 +1,8 @@
 
 # Java Default
-export JAVAFX_HOME="/opt/java/javafx-sdk"
-export JAVA_HOME="/Library/Java/JavaVirtualMachines/openjdk11-zulu/Contents/Home"
+export JAVA_HOME="/Library/Java/JavaVirtualMachines/openjdk17-zulu/Contents/Home"
 export GRAILS_HOME="/opt/local/share/java/grails"
+export JAVAFX_HOME="/opt/java/javafx-sdk"
 
 # Log4J
 export LOG4J_FORMAT_MSG_NO_LOOKUPS=true
@@ -19,4 +19,5 @@ export LOG4J_FORMAT_MSG_NO_LOOKUPS=true
 # Switched to zulu java
 alias j8="export JAVA_HOME=/Library/Java/JavaVirtualMachines/openjdk8-zulu/Contents/Home; java -version"
 alias j11="export JAVA_HOME=/Library/Java/JavaVirtualMachines/openjdk11-zulu/Contents/Home; java -version"
+alias j17="export JAVA_HOME=/Library/Java/JavaVirtualMachines/openjdk17-zulu/Contents/Home; java -version"
 

@@ -10,9 +10,8 @@ __start=$EPOCHREALTIME
 
 # Minimal path additions here; other path additons go in SHELL_CUSTOM_DIR files
 # Add brew or macport minimal path here
-#export PATH="/opt/local/bin:$PATH"
-export PATH="$HOME/brew/bin:$PATH"
-
+export PATH="/opt/local/bin:$PATH"
+#export PATH="$HOME/brew/bin:$PATH"
 
 # Custom
 export SHELL_CUSTOM_DIR="$HOME/.shell.d"
@@ -37,9 +36,8 @@ for f in $(ls $SHELL_CUSTOM_DIR/*.bash); do
     myload "$f"
 done
 
-# De-duplicate PATH -- run this after sourcing everything
-# TODO: test if path ordering is the same before and after
-PATH=$(echo -n $PATH | awk -v RS=: '!($0 in a) {a[$0]; printf("%s%s", length(a) > 1 ? ":" : "", $0)}')
+# De-duplicate PATH and keep the paths in the same order; dupes after first occurence will be removed
+PATH=$(awk -F: 'BEGIN {split(ENVIRON["PATH"],P);r=P[1];A[r]=1;for(e=2;e<length(P)+1;e++){if(P[e] in A == 0){r=r FS P[e];A[P[e]];}};print r;}')
 
 __stop=$EPOCHREALTIME
 __duration=$(echo "$__stop - $__start" | bc)
