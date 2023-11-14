@@ -1,8 +1,11 @@
 # conjur.bash
 
-#PATH="$PATH:/Applications/ConjurCloudCLI.app/Contents/Resources/conjur"
-if [ -x "/Applications/ConjurCloudCLI.app/Contents/Resources/conjur/conjur" ]; then
+export __conjur="/Applications/ConjurCloudCLI.app/Contents/Resources/conjur/conjur"
+if [ -x "$__conjur" ]; then
     if [ ! -x "/usr/local/bin/conjur" ]; then
-	sudo ln -s -f /Applications/ConjurCloudCLI.app/Contents/Resources/conjur/conjur /usr/local/bin/conjur
+	sudo ln -s -f "$__conjur" /usr/local/bin/conjur
     fi
 fi
+
+unset __conjur
+
