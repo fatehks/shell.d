@@ -12,3 +12,6 @@ alias l='ls -l'
 alias llh='ls -latrh'
 
 alias kssh="kitty +kitten ssh"
+
+
+alias instancedns="aws ec2 describe-instances --query 'Reservations[*].Instances[*].[PrivateIpAddress, PublicIpAddress, PublicDnsName]' --output text --instance-ids" 

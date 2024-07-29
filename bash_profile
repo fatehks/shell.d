@@ -40,10 +40,6 @@ for f in $(ls $SHELL_CUSTOM_DIR/*.bash); do
     myload "$f"
 done
 
-# De-duplicate PATH and keep the paths in the same order; dupes after first occurence will be removed
-PATH=$(awk -F: 'BEGIN {split(ENVIRON["PATH"],P);r=P[1];A[r]=1;for(e=2;e<length(P)+1;e++){if(P[e] in A == 0){r=r FS P[e];A[P[e]];}};print r;}')
-
 __stop=$EPOCHREALTIME
 __duration=$(echo "$__stop - $__start" | bc)
 printf "Startup time: %0.6fs\n" $__duration
-
