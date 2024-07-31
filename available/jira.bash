@@ -9,7 +9,7 @@ fi
 # jira commandline
 # REF: <https://github.com/go-jira/jira>
 
-if ! command -v jira >/dev/null ; then
+if ! command -v jira &> /dev/null ; then
 	go install github.com/go-jira/jira/cmd/jira@latest
 fi
 

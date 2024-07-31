@@ -1,7 +1,7 @@
 # curl.bash
 
 ## Homebrew Curl
-if command -v brew; then
+if command -v brew &> /dev/null; then
 
     #curl is keg-only, which means it was not symlinked into $HOME/brew,
     #because macOS already provides this software and installing another version in

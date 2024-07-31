@@ -1,6 +1,6 @@
 # GO Lang
 
-if !command -v go; then
+if ! command -v go &> /dev/null; then
     return
 fi
 
