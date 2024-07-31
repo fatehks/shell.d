@@ -1,6 +1,6 @@
 # brew.bash
 
-if !command -v brew; then
+if ! command -v brew > /dev/null 2>&1; then
     return
 fi
 
