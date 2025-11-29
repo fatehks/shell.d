@@ -1,6 +1,9 @@
 *.bash-completion
 *.bash
+*.zsh
+
 !available/*
 !lib/*
+!enabled/.gitkeep
 .idea
-
+*~

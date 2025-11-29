@@ -1,8 +1,10 @@
-# Python
-
 # python.bash
 
-#PATH=$PATH:/opt/local/Library/Frameworks/Python.framework/Versions/3.7/bin:$HOME/Library/Python/3.7/bin
-
-PATH=$PATH:$HOME/Library/Python/3.10/bin
+if command -v pipx &> /dev/null; then
+  # shellcheck source=/dev/null
+  if [ ! -f "$SHELL_CUSTOM_DIR/pipx.bash-completion" ]; then
+      register-python-argcomplete pipx > "$SHELL_CUSTOM_DIR/pipx.bash-completion"
+  fi
+  source "$SHELL_CUSTOM_DIR/pipx.bash-completion"
+fi
 
