@@ -1,8 +1,8 @@
 # brew.bash
 
-PATH="$HOME/brew/bin:$PATH"
-PATH="$HOME/brew/sbin:$PATH"
-PATH="$HOME/brew/opt/curl/bin:$PATH"
-PATH="$HOME/brew/opt/ruby/bin:$PATH"
-PATH="$HOME/brew/opt/coreutils/libexec/gnubin:$PATH"
-
+export HOMEBREW_PREFIX="/opt/homebrew";
+export HOMEBREW_CELLAR="/opt/homebrew/Cellar";
+export HOMEBREW_REPOSITORY="/opt/homebrew";
+eval "$(/usr/bin/env PATH_HELPER_ROOT="/opt/homebrew" /usr/libexec/path_helper -s)"
+[ -z "${MANPATH-}" ] || export MANPATH=":${MANPATH#:}";
+export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}";

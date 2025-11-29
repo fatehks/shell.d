@@ -2,7 +2,8 @@
 
 
 if [ -n "${INSIDE_EMACS}" ]; then
-	return
+    echo "INSIDE_EMACS... skipping."
+    return
 fi
 
 # Brew
@@ -16,10 +17,10 @@ __completion_paths="${__completion_paths} /etc/profile.d/bash_completion.sh"
 
 
 for f in ${__completion_paths}; do
-	if [ -f "$f" ]; then
-		source $f
-		break
-	fi
+    if [ -f "$f" ]; then
+	source $f
+	break
+    fi
 done
 
 unset __completion_paths
