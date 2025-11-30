@@ -1,8 +1,9 @@
-+++
-date = '2024-05-15T10:00:00-05:00'
-draft = false
-title = 'My Dotfiles Setup: A Simple and Powerful Way to Manage Your Shell'
-+++
+<!--
+---
+update: 2024-05-15
+author: david@fatehks.com
+---
+-->
 
 # My Dotfiles Setup: A Simple and Powerful Way to Manage Your Shell
 
