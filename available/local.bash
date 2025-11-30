@@ -1,6 +1,12 @@
 # local.bash
 
-    
-export PATH="$HOME/bin:$PATH:$HOME/.local/bin"
+# Check macports
+PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 
-shopt -u hostcomplete && complete -F _ssh ssh slogin autossh kssh
+# Check brew
+PATH=/opt/homebrew/bin:$PATH
+
+# My home bin should be searched first
+PATH=$HOME/bin:$PATH
+
+export PATH

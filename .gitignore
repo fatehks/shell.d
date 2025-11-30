@@ -4,4 +4,6 @@
 
 !available/*
 !lib/*
+!enabled/.gitkeep
+.idea
 *~

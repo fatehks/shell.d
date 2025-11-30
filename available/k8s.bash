@@ -13,7 +13,6 @@ if command -v kubectl &> /dev/null; then
     # kubectl plugin "krew"
     # https://krew.sigs.k8s.io/docs/user-guide/setup/install/
     export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
-
 fi
 
 
@@ -54,8 +53,8 @@ if command -v helm &> /dev/null; then
     fi
     source "$SHELL_CUSTOM_DIR/helm.bash-completion"
 fi
-# To install shell completion for supported shells run: kustomize install-completion
-# To uninstall shell completion: COMP_UNINSTALL=1 kustomize install-completion
+# To install shell completion for supported shells run: kustomize completion
+# To uninstall shell completion: COMP_UNINSTALL=1 kustomize completion
 if command -v kustomize &> /dev/null; then
     if [ ! -f "$SHELL_CUSTOM_DIR/kustomize.bash-completion" ]; then
 	kustomize completion bash > "$SHELL_CUSTOM_DIR/kustomize.bash-completion"

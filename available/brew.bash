@@ -1,21 +1,8 @@
 # brew.bash
 
-if ! command -v brew &> /dev/null; then
-    return
-fi
-
-if [ -d "$(brew --prefix)/gnubin" ]; then
-    PATH="$(brew --prefix)/gnubin:$PATH"
-fi
-
-__BREW_PREFIX__=$(brew --prefix)
-PATH="$__BREW_PREFIX__/bin:$PATH"
-PATH="$__BREW_PREFIX__/sbin:$PATH"
-PATH="$__BREW_PREFIX__/opt/coreutils/libexec/gnubin:$PATH"
-#PATH="$__BREW_PREFIX__/opt/make/libexec/gnubin:$PATH"
-
-unset __BREW_PREFIX__
-
-
-export HOMEBREW_TEMP=/Users/david.hisel/brew/tmp
-
+export HOMEBREW_PREFIX="/opt/homebrew";
+export HOMEBREW_CELLAR="/opt/homebrew/Cellar";
+export HOMEBREW_REPOSITORY="/opt/homebrew";
+eval "$(/usr/bin/env PATH_HELPER_ROOT="/opt/homebrew" /usr/libexec/path_helper -s)"
+[ -z "${MANPATH-}" ] || export MANPATH=":${MANPATH#:}";
+export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}";

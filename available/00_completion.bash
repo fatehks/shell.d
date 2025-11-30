@@ -5,7 +5,8 @@ if [ -n "${DISABLE_BASH_COMPLETION}" ]; then
 	return
 fi
 if [ -n "${INSIDE_EMACS}" ]; then
-	return
+    echo "INSIDE_EMACS... skipping."
+    return
 fi
 
 # Linux
@@ -22,11 +23,10 @@ __completion_paths="${__completion_paths} HOME/brew/etc/profile.d/bash_completio
 
 
 for f in ${__completion_paths}; do
-    sf="${f/HOME/"$HOME"}"
-	if [ -f "$sf" ]; then
-		source $sf
-		break
-	fi
+    if [ -f "$f" ]; then
+	source $f
+	break
+    fi
 done
 
 unset __completion_paths

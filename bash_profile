@@ -6,40 +6,64 @@ case $- in
     *) return;;
 esac
 
-__start=$EPOCHREALTIME
+set -a
 
-# Minimal path additions here; other path additons go in SHELL_CUSTOM_DIR files
-# Add brew or macport minimal path here
-if [ -d "/opt/local/bin" ]; then
-    export PATH="/opt/local/bin:$PATH"
-fi
-if [ -d "$HOME/brew/bin" ]; then
-    export PATH="$HOME/brew/bin:$PATH"
-fi
+# Set this to where the custom shell scripts are installed
+SHELL_CUSTOM_DIR="$HOME/.shell.d"
+SHELL_CUSTOM_LIB_DIR="$HOME/.shell.d/lib"
 
-# Custom
-export SHELL_CUSTOM_DIR="$HOME/.shell.d"
+# Set this to "true" to display the timing of the loads
+SHOW_TIMER="true"
 
-function quickload {
-	source $1
+# bare-bones timer functionality using an assoc array
+declare -A __timer
+timer_start() { __timer["${1}_start"]="$EPOCHREALTIME"; }
+timer_stop()  { __timer["${1}_stop"]="$EPOCHREALTIME";  }
+timer_duration() {
+  echo -n "${__timer[${1}_stop]:0} - ${__timer[${1}_start]:0}" | bc -l
 }
-function timeload {
-	printf "Loading $1..."
-	__load_start=$EPOCHREALTIME
-	source $1
-	__load_stop=$EPOCHREALTIME
-	__load_duration=$(echo "$__load_stop - $__load_start" | bc)
-	printf "\t\tload time: %0.6fs\n" $__load_duration
+timer_show() {
+  [ "$SHOW_TIMER" = "true" ] && printf "%-20s: %0.6fs\n" "${1}" "$(timer_duration "${2}")"
 }
 
-# this alias is used for sourcing, set to `quickload` or `timeload`
-alias myload=timeload
+timer_start "profile"
+
+function load {
+  timer_start "load"
+
+  # shellcheck disable=SC1090
+  source "$1"
+
+  timer_stop "load"
+  timer_show "$(basename "$1")" "load"
+}
+
+# Get minimum locals setup
+# Set PATH to brew or macports or other paths needed by other scripts
+load "$SHELL_CUSTOM_DIR/enabled/local.bash"
 
 # Load customizations from SHELL_CUSTOM_DIR
-for f in $(ls $SHELL_CUSTOM_DIR/*.bash); do
-    myload "$f"
+shopt -s extglob
+for f in "$SHELL_CUSTOM_DIR"/enabled/*.bash; do
+  if [[ "$(basename "$f")" == local* ]]; then
+    continue
+  fi
+  load "$f"
 done
 
-__stop=$EPOCHREALTIME
-__duration=$(echo "$__stop - $__start" | bc)
-printf "Startup time: %0.6fs\n" $__duration
+load "$SHELL_CUSTOM_DIR/enabled/local-post.bash"
+
+# De-duplicate PATH and keep the paths in the same order; dupes after first occurrence will be removed
+PATH=$(printf %s "$PATH" | awk -v RS=: -v ORS=: '!a[$0]++ {if (NR>1) printf(":"); printf("%s", $0)}')
+
+timer_stop "profile"
+SHOW_TIMER="true" timer_show "Startup time" "profile"
+
+# Cleanup
+unset -f load
+unset -f timer_start
+unset -f timer_stop
+unset -f timer_duration
+unset -f timer_show
+
+# __END__
