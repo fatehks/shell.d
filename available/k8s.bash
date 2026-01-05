@@ -34,12 +34,6 @@ source "$SHELL_CUSTOM_DIR/kubectl.bash-completion"
 complete -F __start_kubectl k
 
 
-# shellcheck source=/dev/null
-if [ ! -f "$SHELL_CUSTOM_DIR/krew.bash-completion" ]; then
-    kubectl krew completion bash > "$SHELL_CUSTOM_DIR/krew.bash-completion"
-fi
-source "$SHELL_CUSTOM_DIR/krew.bash-completion"
-
 if command -v kubectx &> /dev/null; then
     # add kubectx autocomplete
     if [ -f /opt/local/etc/bash_completion.d/kubectx ]; then
